@@ -1,0 +1,12 @@
+﻿@model MovieDisplayVM[]
+
+<style>
+    p:hover{
+        background-color: #808080;
+    }
+</style>
+
+@foreach (var movie in Model)
+{
+    <p><a href="/movies/info/@movie.Id"><img src="~/img/@(movie.Id).jpg" width="40" height="50" />@movie.Title</a></p>
+}

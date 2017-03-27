@@ -1,0 +1,41 @@
+﻿@model MovieDisplayVM
+
+<style>
+    .btn-group button {
+        color: gold;
+        background-color: black;
+        border-radius: 5px;
+        padding: 5px;
+        margin-right: 5px;
+    }
+
+        .btn-group button:hover {
+            color: white;
+            background-color: black;
+        }
+</style>
+
+<tr>
+    <td><a href="/movies/info/@Model.Id">@Model.Title</td>
+    <td>@Model.Length min</td>
+    @if (Model.Rate == 0)
+    {
+        <td>N/A</td>
+    }
+    else
+    {
+        <td>@Model.Rate</td>
+    }
+    <td>
+        <div class="btn-group">
+            <button type="button" style="width:50px" class="btn btn-default btn-xs" onclick='location.href="/Movies/Info/@Model.Id"'>More</button>
+        </div>
+        <div class="btn-group">
+            <button type="button" style="width:50px" class="btn btn-default btn-xs" onclick='location.href="/Movies/Edit/@Model.Id"'>Edit</button>
+        </div>
+    </td>
+</tr>
+
+
+
+

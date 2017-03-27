@@ -1,0 +1,183 @@
+﻿<style>
+    .nav.navbar-nav li a {
+        color: gold;
+    }
+
+    .nav.navbar-nav a:hover {
+        color: darkgoldenrod;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+
+
+<p style="color:white;">Guldrullen</p>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Movies" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Movies" asp-action="Create">Add movie</a></li>
+            <li><a asp-controller="Movies" asp-action="Display">Browse movies</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+
+                <div class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <input id="search" oninput="search()" type="text" class="form-control" placeholder="Search movie">
+                            <div class="dropdown-content">
+                                <div style="width:250px;" id="divResult"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+
+            <li id="logIn"></li>
+            <li id="signUp"></li>
+
+            @*
+                    <li><a href="#" data-toggle="modal" data-target="#signUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#logIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>*@
+        </ul>
+        <div class="modal fade" id="logIn" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Log in</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form asp-controller="Movies" asp-action="Index">
+                            <label> Username: </label>
+                            <input placeholder="Username" />
+                            <br>
+                            <label> Password: </label>
+                            <input placeholder="Password" />
+                            <br>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Log in</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="signUp" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sign up</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form asp-controller="Movies" asp-action="Index">
+                            <label> Username: </label>
+                            <input placeholder="Username" />
+                            <br>
+                            <label> Password: </label>
+                            <input placeholder="Password" />
+                            <br>
+                            <label> Phone: </label>
+                            <input placeholder="Phone" />
+                            <br>
+                            <label> E-mail: </label>
+                            <input placeholder="Email" />
+                            <br>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Register</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<script>
+    function search() {
+        var searchResult = document.getElementById("search").value;
+        $.ajax({
+            url: "/movies/GetMovies",
+            type: "Get",
+            data: "id=" + searchResult,
+            success: function (result) {
+                $("#divResult").html(result);
+            },
+            error: function () {
+                alert("fail");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/users/CheckIfUserIsSignedIn",
+            type: "Get",
+            data: "id=1",
+            success: function (result) {
+                $("#signUp").html(result);
+            },
+            error: function () {
+                alert("fail");
+            }
+        });
+    })
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/users/CheckIfUserIsSignedIn",
+            type: "Get",
+            data: "id=2",
+            success: function (result) {
+                $("#logIn").html(result);
+            },
+            error: function () {
+                alert("fail");
+            }
+        });
+    })
+
+
+
+    //$("#search").change(function () {
+    //    var searchResult = $("#search").val();
+    //    $.ajax({
+    //        url: "/movies/GetMovies",
+    //        type: "Get",
+    //        data: "id=" + searchResult,
+    //        success: function (result) {
+    //            $("#divResult").html(result);
+    //        },
+    //        error: function () {
+    //            alert("fail");
+    //        }
+    //    });
+    //})
+</script>

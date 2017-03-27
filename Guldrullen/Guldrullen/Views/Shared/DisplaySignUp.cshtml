@@ -1,0 +1,9 @@
+﻿@model UsersRegisterViewModel
+
+@if (Model.UserName == null)
+{
+    <a href="/users/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+}
+else{
+    <p style="color:gold">@Model.UserName</p>
+}

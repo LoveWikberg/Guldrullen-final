@@ -1,0 +1,37 @@
+﻿
+@model MovieInfoVM
+
+<style>
+    .btn-group button {
+        color: gold;
+        background-color: black;
+        border-radius: 5px;
+        padding: 5px;
+        margin-right: 5px;
+    }
+
+        .btn-group button:hover {
+            color: white;
+            background-color: black;
+        }
+
+        .btn-group button:focus {
+            color: gold;
+            background-color: black;
+        }
+</style>
+
+@if (Model.ReviewTitle != null)
+{
+    <h3>@Model.ReviewTitle</h3>
+    <div class="btn-group">
+        <button data-toggle="collapse" align="center" class="btn btn-group btn-sm" data-target="#@Model.Id">See more</button>
+    </div>
+    <div id="@Model.Id" class="collapse">
+        <div class="container">
+            <br />
+            <p>Score: @Model.Rate/10</p>
+            <h4>@Model.Text</h4>
+        </div>
+    </div>
+}
