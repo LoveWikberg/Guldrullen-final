@@ -18,6 +18,8 @@ namespace Guldrullen.Models
         public int Rate { get; set; }
 
         public int MovieId { get; set; }
+
+        public string User { get; set; }
     }
 }
 

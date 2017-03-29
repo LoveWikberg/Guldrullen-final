@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Content Include="wwwroot\css\bootstrap.js" />
+    <Content Include="wwwroot\css\Main.css" />
     <Content Include="wwwroot\css\StyleSheet.css" />
     <Content Include="wwwroot\img\notebook.jpg" />
     <Content Include="wwwroot\script\JavaScript.js" />

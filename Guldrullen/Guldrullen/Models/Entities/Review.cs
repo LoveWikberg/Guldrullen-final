@@ -10,6 +10,7 @@ namespace Guldrullen.Models.Entities
         public string Title { get; set; }
         public string Text { get; set; }
         public int Rate { get; set; }
+        public string User { get; set; }
 
         public virtual Movie Movie { get; set; }
     }

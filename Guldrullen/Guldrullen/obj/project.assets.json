@@ -10465,10 +10465,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program\\Guldrullen\\Guldrullen\\Guldrullen.csproj",
+      "projectUniqueName": "D:\\Programmering\\Guldrullen\\Guldrullen-final\\Guldrullen\\Guldrullen\\Guldrullen.csproj",
       "projectName": "Guldrullen",
-      "projectPath": "D:\\Program\\Guldrullen\\Guldrullen\\Guldrullen.csproj",
-      "outputPath": "D:\\Program\\Guldrullen\\Guldrullen\\obj\\",
+      "projectPath": "D:\\Programmering\\Guldrullen\\Guldrullen-final\\Guldrullen\\Guldrullen\\Guldrullen.csproj",
+      "outputPath": "D:\\Programmering\\Guldrullen\\Guldrullen-final\\Guldrullen\\Guldrullen\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

@@ -1,0 +1,62 @@
+﻿.btn-group button {
+    color: gold;
+    background-color: black;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+    .btn-group button:hover {
+        color: white;
+        background-color: black;
+    }
+
+    .btn-group button:focus {
+        color: gold;
+        background-color: black;
+    }
+
+.searchBarHover p:hover {
+    background-color: #808080;
+}
+
+.nav.navbar-nav li a {
+    color: gold;
+}
+
+.nav.navbar-nav a:hover {
+    color: darkgoldenrod;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 1px 8px 16px 1px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.goldenColorText {
+    color: gold;
+}

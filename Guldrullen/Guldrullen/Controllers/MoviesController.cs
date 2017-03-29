@@ -8,6 +8,8 @@ using Guldrullen.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,18 +17,16 @@ namespace Guldrullen.Controllers
 {
     public class MoviesController : Controller
     {
-
+        UserManager<IdentityUser> userManager;
         GuldrullenContext context;
         IHostingEnvironment hostingEnvironment;
 
-        public MoviesController(GuldrullenContext context, IHostingEnvironment hostingEnvironment)
+        public MoviesController(UserManager<IdentityUser> userManager, GuldrullenContext context, IHostingEnvironment hostingEnvironment)
         {
+            this.userManager = userManager;
             this.hostingEnvironment = hostingEnvironment;
             this.context = context;
         }
-
-
-        // GET: /<controller>/
 
         [HttpGet]
         public IActionResult Index()
@@ -44,6 +44,8 @@ namespace Guldrullen.Controllers
         {
             MovieDisplayAdvancedVM viewModel = new MovieDisplayAdvancedVM();
 
+            // Genre selections for filtering search results on the "Browse movies" page. 
+
             viewModel.Filter = new FilterGenre
             {
                 Genres = new List<GenreVM>
@@ -59,6 +61,8 @@ namespace Guldrullen.Controllers
                     new GenreVM {Id=9, TypeOfGenre="Adventure"},
                 }
             };
+
+            // Tempdata for saving the chosen filter value for search.
 
             viewModel.Searchinfo = (string)TempData["SearchInfo"];
             viewModel.SearchBox = (string)TempData["Search"];
@@ -86,9 +90,9 @@ namespace Guldrullen.Controllers
         {
             TempData["ChosenGenre"] = viewModel.Filter.SelectedGenre;
             TempData["Search"] = viewModel.SearchBox;
-            string Searchinfo = "Result for \"" + viewModel.SearchBox + "\" in genre \"" + viewModel.Filter.SelectedGenre + "\"";
+            string searchInfo = "Result for \"" + viewModel.SearchBox + "\" in genre \"" + viewModel.Filter.SelectedGenre + "\"";
 
-            TempData["SearchInfo"] = Searchinfo;
+            TempData["SearchInfo"] = searchInfo;
 
             return RedirectToAction(nameof(MoviesController.Display));
         }
@@ -102,6 +106,9 @@ namespace Guldrullen.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            //Autorhize attribute for validation that a user is logged in.
+            //If not, the user is redirected to the log in page.
+
             var genres = context.GetAllGenres();
 
             var viewModel = new MovieCreateVM();
@@ -144,8 +151,9 @@ namespace Guldrullen.Controllers
         {
             var viewModel = new MovieReviewAdvancedVM();
             viewModel.ListViewModels = context.ListReviews(id);
-            viewModel.FormViewModel = context.GetMovieToShowOnReviewPage(id);
-            //test.CreateReview = context.GetMovieToShowOnReviewPage();
+            viewModel.FormViewModel = context.DisplayMovieInfo(id);
+            viewModel.UserName = userManager.GetUserName(HttpContext.User);
+
             viewModel.CreateReview = new ReviewCreateVM
             {
                 Rates = new List<RateVm>
@@ -173,7 +181,9 @@ namespace Guldrullen.Controllers
             {
                 return View(viewModel);
             }
-            context.AddReview(viewModel, id);
+
+            string userName = userManager.GetUserName(HttpContext.User);
+            context.AddReview(viewModel, id, userName);
             return RedirectToAction(nameof(MoviesController.Info));
         }
 
@@ -198,6 +208,7 @@ namespace Guldrullen.Controllers
             return RedirectToAction(nameof(MoviesController.Display));
         }
 
+        // Gets the movies that matches the users search input
         public IActionResult GetMovies(string id)
         {
             var viewModel = context.GetNavBarSearchResult(id);

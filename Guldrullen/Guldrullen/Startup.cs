@@ -19,11 +19,12 @@ namespace Guldrullen
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Guldrullen;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            // Guldrullen database
+            var connString = @"Data Source=guldrullen.database.windows.net;Initial Catalog=Guldrullen;Integrated Security=False;User ID=teamguldrullen;Password=Qk7Kagr4bb4r;Connect Timeout=15;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<GuldrullenContext>(o => o.UseSqlServer(connString));
 
-            //User database
-            var connStringUsers = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=GuldrullenUsers;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            // User database
+            var connStringUsers = @"Data Source=guldrullen.database.windows.net;Initial Catalog=GuldrullenUsers;Integrated Security=False;User ID=teamguldrullen;Password=Qk7Kagr4bb4r;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<IdentityDbContext>(options => options.UseSqlServer(connStringUsers));
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {

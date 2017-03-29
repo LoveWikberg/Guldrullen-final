@@ -11,5 +11,7 @@ namespace Guldrullen.Models
         public MovieInfoVM[] ListViewModels { get; set; }
         public MovieDisplayVM FormViewModel { get; set; }
         public ReviewCreateVM CreateReview { get; set; }
+
+        public string UserName { get; set; }
     }
 }

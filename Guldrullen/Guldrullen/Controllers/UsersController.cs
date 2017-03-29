@@ -75,7 +75,7 @@ namespace Guldrullen.Controllers
             {
                 return View(model);
             }
-                return Redirect("/Movies/Index");
+            return Redirect("/Movies/Index");
         }
 
         public async Task<IActionResult> Logout()
@@ -99,6 +99,7 @@ namespace Guldrullen.Controllers
             {
                 return PartialView("DisplaySignIn", user);
             }
+
         }
     }
 }

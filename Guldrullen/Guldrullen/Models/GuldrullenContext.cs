@@ -14,6 +14,7 @@ namespace Guldrullen.Models.Entities
 
         }
 
+        // Method for displaying movies saved in the database.
         public MovieDisplayVM[] ListMovies(string title, string genre)
         {
             var ret = Movie
@@ -47,6 +48,7 @@ namespace Guldrullen.Models.Entities
             return ret;
         }
 
+        // Method for displaying the top ten rated movies on the index page
         public MovieIndexTopRatedVM[] GetTopTenMovies()
         {
             var topFiveMovies = ListMovies("", "")
@@ -61,6 +63,7 @@ namespace Guldrullen.Models.Entities
             return topFiveMovies;
         }
 
+        // Method for displaying the recently added movies by using the highest id added.
         public MovieIndexRecentlyAddedVM[] GetRecentlyAddedMovies()
         {
             var newMovies = ListMovies("", "")
@@ -75,6 +78,7 @@ namespace Guldrullen.Models.Entities
             return newMovies;
         }
 
+        // Method for adding and saving new movies in the database. 
         public int AddMovie(MovieCreateVM viewModel)
         {
             var movieToAdd = new Movie
@@ -92,7 +96,8 @@ namespace Guldrullen.Models.Entities
             return movieToAdd.Id;
         }
 
-        public void AddReview(ReviewCreateVM viewModel, int id)
+        // Method for adding review to a specific movie
+        public void AddReview(ReviewCreateVM viewModel, int id, string userName)
         {
             var movie = Movie.SingleOrDefault(c => c.Id == id);
 
@@ -102,6 +107,7 @@ namespace Guldrullen.Models.Entities
                 Text = viewModel.Text,
                 Rate = viewModel.SelectedRate,
                 MovieId = movie.Id,
+                User = userName
             };
 
 
@@ -109,18 +115,18 @@ namespace Guldrullen.Models.Entities
             SaveChanges();
         }
 
+        // Method for displaying reviews connected to a specific movie
         public MovieInfoVM[] ListReviews(int id)
         {
-            //var movieTitle = Movie.SingleOrDefault(m => m.Id == id).Title;
             var reviews = Review
                 .Where(c => c.MovieId == id)
-                .Select(m => new MovieInfoVM
+                .Select(r => new MovieInfoVM
                 {
-                    ReviewTitle = m.Title,
-                    Text = m.Text,
-                    Rate = m.Rate,
-                    Id = m.Id,
-                    // Movie = movieTitle,
+                    ReviewTitle = r.Title,
+                    Text = r.Text,
+                    Rate = r.Rate,
+                    Id = r.Id,
+                    User = r.User
                 }).ToArray();
 
 
@@ -128,7 +134,8 @@ namespace Guldrullen.Models.Entities
 
         }
 
-        internal MovieDisplayVM GetMovieToShowOnReviewPage(int id)
+        // Method for displaying detailed movie info
+        internal MovieDisplayVM DisplayMovieInfo(int id)
         {
             var movie = Movie.SingleOrDefault(c => c.Id == id);
             return new MovieDisplayVM
@@ -141,6 +148,7 @@ namespace Guldrullen.Models.Entities
             };
         }
 
+        // Gets info about the movie for the EditMovie method
         public MovieEditVM GetMovieForEdit(int id)
         {
             var movie = Movie.SingleOrDefault(c => c.Id == id);
@@ -153,6 +161,7 @@ namespace Guldrullen.Models.Entities
                 Trailer = movie.Trailer
             };
         }
+
 
         public void EditMovie(MovieEditVM viewModel, int id)
         {
@@ -167,6 +176,7 @@ namespace Guldrullen.Models.Entities
             SaveChanges();
         }
 
+        // Gets all the genres for the edit and create viewpages
         public IEnumerable<string> GetAllGenres()
         {
             return new List<string>
@@ -182,6 +192,7 @@ namespace Guldrullen.Models.Entities
             };
         }
 
+        // Returns the user selected genre for the edited/created movie
         public IEnumerable<SelectListItem> GetSelectedListItem(IEnumerable<string> elements)
         {
             var selectedGenre = new List<SelectListItem>();
@@ -197,6 +208,7 @@ namespace Guldrullen.Models.Entities
             return selectedGenre;
         }
 
+        // Returns an array of the movies that matches the users search input
         public MovieDisplayVM[] GetNavBarSearchResult(string search)
         {
             var moviesToReturn = Movie.Select(m => new MovieDisplayVM

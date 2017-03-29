@@ -1,0 +1,11 @@
+﻿@model UsersRegisterViewModel
+
+@if (Model.UserName == null)
+{
+
+    <a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+}
+else
+{
+    <a asp-controller="users" asp-action="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+}

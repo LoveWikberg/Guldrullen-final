@@ -1,0 +1,9 @@
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\bin\Release\netcoreapp1.1\Guldrullen.deps.json
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\bin\Release\netcoreapp1.1\Guldrullen.runtimeconfig.json
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\bin\Release\netcoreapp1.1\Guldrullen.runtimeconfig.dev.json
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\bin\Release\netcoreapp1.1\Guldrullen.dll
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\bin\Release\netcoreapp1.1\Guldrullen.pdb
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\obj\Release\netcoreapp1.1\Guldrullen.csprojResolveAssemblyReference.cache
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\obj\Release\netcoreapp1.1\Guldrullen.AssemblyInfo.cs
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\obj\Release\netcoreapp1.1\Guldrullen.dll
+D:\Programmering\Guldrullen\Guldrullen-final\Guldrullen\Guldrullen\obj\Release\netcoreapp1.1\Guldrullen.pdb
